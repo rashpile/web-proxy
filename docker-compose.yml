@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+     - /var/run/docker.sock:/tmp/docker.sock
+    networks:
+      - web_projects
+#  nginx-demo:
+#    image: rashpile/nginx-demo
+#    environment:
+#      VIRTUAL_HOST: "example.com,www.example.com"
+networks:
+  web_projects:
+    external:
+      name: ${WEB_NETWORK:-web-projects}
